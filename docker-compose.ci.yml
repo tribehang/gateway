@@ -1,6 +1,6 @@
 version: '2'
 services:
-  triebhang-gateway:
+  tribehang-gateway:
     network_mode: host
     container_name: gateway
     image: triebhang/gateway:develop
