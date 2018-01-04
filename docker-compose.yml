@@ -1,5 +1,16 @@
 version: '2'
 services:
+  tribehang-ui:
+    container_name: tribehang-ui
+    image: tribehang/ui:develop
+    mem_limit: 2048m
+    volumes:
+      - ../ui:/var/www/html
+    ports:
+      - "80:80"
+    build:
+      context: ../ui
+      dockerfile: Dockerfile
   tribehang-gateway:
     container_name: tribehang-gateway
     image: tribehang/gateway:develop
