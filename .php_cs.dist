@@ -1,0 +1,28 @@
+<?php
+return PhpCsFixer\Config::create()
+    ->setRules([
+        '@PSR2' => true,
+        'general_phpdoc_annotation_remove' => ['author'],
+        'phpdoc_no_package' => true,
+        'no_unused_imports' => true,
+        'array_syntax' => ['syntax' => 'short'],
+        'concat_space' => ['spacing' => 'one'],
+        'mb_str_functions' => true,
+        'method_separation' => true,
+        'new_with_braces' => true,
+        'no_blank_lines_after_class_opening' => true,
+        'no_blank_lines_after_phpdoc' => true,
+        'no_empty_comment' => true,
+        'no_empty_phpdoc' => true,
+        'no_leading_import_slash' => true,
+        'no_unreachable_default_argument_value' => true,
+        'no_useless_return' => true,
+        'not_operator_with_successor_space' => true,
+        'return_type_declaration' => true,
+        'single_quote' => true,
+        'no_useless_else' => true,
+        'binary_operator_spaces' => ['align_equals' => false],
+    ])
+    ->setUsingCache(false)
+    ->setRiskyAllowed(true);
+;

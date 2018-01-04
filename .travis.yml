@@ -1,0 +1,46 @@
+sudo: required
+
+language: php
+php:
+  - '7.2'
+
+cache:
+  directories:
+  - $HOME/.m2
+  - vendor
+
+branches:
+  only:
+    - master
+    - develop
+
+services:
+  - docker
+
+before_install:
+  - docker info
+  - echo $DOCKERHUB_PASSWORD > docker_password.txt
+  - docker login -u $DOCKERHUB_LOGIN -p $DOCKERHUB_PASSWORD
+  - cat docker_password.txt | docker login --username $DOCKERHUB_LOGIN --password-stdin
+
+install:
+  - docker build -t tribehang/gateway .
+
+before_script:
+  - mysql -uroot -e "CREATE DATABASE gateway;"
+  - docker-compose -f docker-compose.ci.yml up -d
+  - composer config --global github-oauth.github.com 844e38651cc95a251add0dfdfd1f49072fab26ff
+  - composer install
+  - docker logs gateway
+  - while ! curl localhost -s -f -o /dev/null; do echo -n "." && sleep 1; done;
+
+script:
+  - vendor/bin/phpunit --exclude-group=functional
+  - php -n vendor/bin/php-cs-fixer fix ./app --config=.php_cs.dist -v --dry-run --diff
+
+after_success:
+  - chmod +x bin/hub-deploy.sh && bin/hub-deploy.sh
+  - chmod +x bin/configure_aws.sh && bin/configure_aws.sh
+
+after_failure:
+  - chmod +x bin/configure_aws.sh && bin/configure_aws.sh

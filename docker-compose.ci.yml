@@ -1,0 +1,11 @@
+version: '2'
+services:
+  triebhang-gateway:
+    network_mode: host
+    container_name: gateway
+    image: triebhang/gateway:develop
+    mem_limit: 3584m
+    env_file:
+      - .env.ci
+    ports:
+      - "80:80"

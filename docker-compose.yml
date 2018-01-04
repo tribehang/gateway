@@ -1,0 +1,33 @@
+version: '2'
+services:
+  triebhang-gateway:
+    container_name: triebhang-gateway
+    image: triebhang/gateway:develop
+    mem_limit: 2048m
+    env_file:
+      - .env
+      - .env.develop
+    volumes:
+      - .:/var/www/html
+    ports:
+      - "80:80"
+    links:
+      - gateway-db
+      - redis-db
+  gateway-db:
+    container_name: gateway-db
+    image: mysql:5.7
+    volumes:
+      - "~/.triebhang-gateway/db:/var/lib/mysql"
+      - "./docker/mysql:/docker-entrypoint-initdb.d"
+    environment:
+      - MYSQL_ALLOW_EMPTY_PASSWORD=yes
+    ports:
+      - "3306:3306"
+  redis-db:
+    container_name: redis-db
+    image: redis:4.0.6
+    volumes:
+      - "~/.triebhang-gateway/redis:/data"
+    ports:
+      - "6379:6379"
