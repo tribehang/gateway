@@ -18,7 +18,11 @@ $router->group(['prefix' => Authenticate::AUTH_SERVICE], function () use ($route
     $router->post('/signin', ['uses' => 'AuthController@signIn']);
     $router->post('/signup', ['uses' => 'AuthController@signUp']);
 
+    $router->get('/users', 'AuthController@getUser');
+
     $router->post('/test', ['uses' => 'AuthController@test']);
+
+
 });
 
 

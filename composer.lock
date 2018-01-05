@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "f4a7a0f04f6b3258d1fa7a5cb41036db",
+    "content-hash": "3dd6e0c8cb601a6270ef87ff9f3e0923",
     "packages": [
         {
             "name": "alsofronie/eloquent-uuid",
@@ -2695,6 +2695,46 @@
                 "simple-cache"
             ],
             "time": "2017-01-02T13:31:39+00:00"
+        },
+        {
+            "name": "smskin/lumen-make",
+            "version": "v1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/smskin/lumen-make.git",
+                "reference": "7ca486b5cac5894424b8a11365f54d969ff6fa65"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/smskin/lumen-make/zipball/7ca486b5cac5894424b8a11365f54d969ff6fa65",
+                "reference": "7ca486b5cac5894424b8a11365f54d969ff6fa65",
+                "shasum": ""
+            },
+            "require": {
+                "laravel/lumen-framework": "~5.4"
+            },
+            "type": "lumen",
+            "autoload": {
+                "psr-4": {
+                    "SMSkin\\LumenMake\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Michael Bonds",
+                    "email": "mbonds1219@gmail.com"
+                },
+                {
+                    "name": "Sergey Mikhaylov",
+                    "email": "serg@msoinvest.com"
+                }
+            ],
+            "description": "Lumen make adds more make commands to lumen for jobs, controllers, middleware, etc.",
+            "time": "2017-02-08T08:52:16+00:00"
         },
         {
             "name": "symfony/console",

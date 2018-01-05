@@ -1,6 +1,8 @@
 <?php
 
 use EllipseSynergie\ApiResponse\Laravel\LumenServiceProvider;
+use SMSkin\LumenMake\LumenMakeServiceProvider;
+use SMSkin\LumenMake\Providers\FormRequestServiceProvider;
 
 require_once __DIR__.'/../vendor/autoload.php';
 
@@ -90,6 +92,8 @@ $app->register(App\Providers\AuthServiceProvider::class);
 $app->register(Laravel\Passport\PassportServiceProvider::class);
 $app->register(Dusterio\LumenPassport\PassportServiceProvider::class);
 $app->register(LumenServiceProvider::class);
+$app->register(LumenMakeServiceProvider::class);
+$app->register(FormRequestServiceProvider::class);
 
 /*
 |--------------------------------------------------------------------------

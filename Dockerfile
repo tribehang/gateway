@@ -1,4 +1,4 @@
-FROM tribehang/php-container
+FROM tribehang/php-container:latest
 
 RUN apt-get -y update && \
     apt-get -y --no-install-recommends install \
