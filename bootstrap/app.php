@@ -1,5 +1,6 @@
 <?php
 
+use App\Providers\CustomValidationServiceProvider;
 use EllipseSynergie\ApiResponse\Laravel\LumenServiceProvider;
 use SMSkin\LumenMake\LumenMakeServiceProvider;
 use SMSkin\LumenMake\Providers\FormRequestServiceProvider;
@@ -52,6 +53,10 @@ $app->singleton(
     App\Console\Kernel::class
 );
 
+
+$app->singleton('filesystem', function ($app) {
+    return $app->loadComponent('filesystems', 'Illuminate\Filesystem\FilesystemServiceProvider', 'filesystem');
+});
 /*
 |--------------------------------------------------------------------------
 | Register Middleware
@@ -94,6 +99,7 @@ $app->register(Dusterio\LumenPassport\PassportServiceProvider::class);
 $app->register(LumenServiceProvider::class);
 $app->register(LumenMakeServiceProvider::class);
 $app->register(FormRequestServiceProvider::class);
+$app->register(CustomValidationServiceProvider::class);
 
 /*
 |--------------------------------------------------------------------------

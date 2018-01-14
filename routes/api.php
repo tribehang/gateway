@@ -20,6 +20,8 @@ $router->group(['prefix' => Authenticate::AUTH_SERVICE], function () use ($route
 
     $router->get('/users', 'AuthController@getUser');
 
+    $router->post('/profile_images', 'ProfileImageController@create');
+
     $router->post('/test', ['uses' => 'AuthController@test']);
 
 

@@ -43,7 +43,8 @@ class AuthController extends Controller
         }
 
         return $this->response->withItem(
-            $user, new UserTransformer()
+            $user,
+            new UserTransformer()
         )->setStatusCode(200);
     }
 
@@ -56,7 +57,8 @@ class AuthController extends Controller
         ]);
 
         return $this->response->withItem(
-            $user, new UserTransformer()
+            $user,
+            new UserTransformer()
         )->setStatusCode(201);
     }
 

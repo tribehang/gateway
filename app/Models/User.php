@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Alsofronie\Uuid\UuidModelTrait;
 use Illuminate\Auth\Authenticatable;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Laravel\Lumen\Auth\Authorizable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
@@ -44,5 +45,10 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
         foreach ($this->tokens as $token) {
             $token->revoke();
         }
+    }
+
+    public function profileImage(): HasOne
+    {
+        return $this->hasOne(ProfileImage::class);
     }
 }
