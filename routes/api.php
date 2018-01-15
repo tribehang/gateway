@@ -18,7 +18,8 @@ $router->group(['prefix' => Authenticate::AUTH_SERVICE], function () use ($route
     $router->post('/signin', ['uses' => 'AuthController@signIn']);
     $router->post('/signup', ['uses' => 'AuthController@signUp']);
 
-    $router->get('/users', 'AuthController@getUser');
+    $router->get('/users', 'UserController@getUser');
+    $router->patch('/users', 'UserController@updateUser');
 
     $router->post('/profile_images', 'ProfileImageController@create');
 
