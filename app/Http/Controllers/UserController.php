@@ -2,13 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\SignUpRequest;
+use App\Http\Requests\UserCreateRequest;
 use App\Http\Requests\UserUpdateRequest;
 use App\Http\Transformers\UserTransformer;
-use App\Models\User;
+use App\Repositories\UserRepository;
 use EllipseSynergie\ApiResponse\Contracts\Response;
-use GuzzleHttp\Client;
-use GuzzleHttp\Exception\ClientException;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -18,12 +16,18 @@ class UserController extends Controller
      */
     public $response;
 
-    public function __construct(Response $response)
+    /**
+     * @var UserRepository
+     */
+    protected $userRepository;
+
+    public function __construct(Response $response, UserRepository $usersRepository)
     {
         $this->response = $response;
+        $this->userRepository = $usersRepository;
     }
 
-    public function getUser(Request $request)
+    public function get(Request $request)
     {
         $user = $request->user();
 
@@ -37,7 +41,7 @@ class UserController extends Controller
         )->setStatusCode(200);
     }
 
-    public function updateUser(UserUpdateRequest $request)
+    public function update(UserUpdateRequest $request)
     {
         $user = $request->user();
 
@@ -48,5 +52,17 @@ class UserController extends Controller
         return $this->response->withItem(
             $user, new UserTransformer()
         )->setStatusCode(200);
+    }
+
+    public function create(UserCreateRequest $request)
+    {
+        $user = $this->userRepository->create(
+            $request->all()
+        );
+
+        return $this->response->withItem(
+            $user,
+            new UserTransformer()
+        )->setStatusCode(201);
     }
 }

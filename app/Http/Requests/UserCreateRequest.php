@@ -2,7 +2,7 @@
 
 namespace App\Http\Requests;
 
-class SignUpRequest extends ApiRequestValidation
+class UserCreateRequest extends ApiRequestValidation
 {
     public function rules()
     {

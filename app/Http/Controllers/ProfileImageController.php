@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\ProfileImageCreateRequest;
 use App\Http\Transformers\ProfileImageTransformer;
 use App\Models\ProfileImage;
+use App\Repositories\ProfileImageRepository;
 use App\Services\FileStorageService;
 use EllipseSynergie\ApiResponse\Contracts\Response;
 
@@ -20,10 +21,16 @@ class ProfileImageController extends Controller
      */
     public $response;
 
-    public function __construct(Response $response, FileStorageService $fileStorageService)
+    /*
+     * @var ProfileImageRepository
+     */
+    public $modelRepository;
+
+    public function __construct(Response $response, FileStorageService $fileStorageService, ProfileImageRepository $modelRepository)
     {
         $this->response = $response;
         $this->fileStorageService = $fileStorageService;
+        $this->modelRepository = $modelRepository;
     }
 
     public function create(ProfileImageCreateRequest $request)
@@ -32,8 +39,7 @@ class ProfileImageController extends Controller
             $this->deleteProfileImage($request);
         }
 
-
-        $profileImage = ProfileImage::create([
+        $profileImage = $this->modelRepository->create([
             'user_id' => $request->user()->id,
         ]);
 

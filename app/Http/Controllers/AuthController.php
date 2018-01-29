@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\SignUpRequest;
+use App\Http\Requests\UserCreateRequest;
 use App\Http\Transformers\UserTransformer;
 use App\Models\User;
 use EllipseSynergie\ApiResponse\Contracts\Response;
@@ -46,20 +46,6 @@ class AuthController extends Controller
             $user,
             new UserTransformer()
         )->setStatusCode(200);
-    }
-
-    public function signUp(SignUpRequest $request)
-    {
-        $user = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => $request->password,
-        ]);
-
-        return $this->response->withItem(
-            $user,
-            new UserTransformer()
-        )->setStatusCode(201);
     }
 
     public function signIn(Request $request)

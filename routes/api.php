@@ -16,10 +16,10 @@ use App\Http\Middleware\Authenticate;
 $router->group(['prefix' => Authenticate::AUTH_SERVICE], function () use ($router) {
 
     $router->post('/signin', ['uses' => 'AuthController@signIn']);
-    $router->post('/signup', ['uses' => 'AuthController@signUp']);
+    $router->post('/signup', 'UserController@create');
 
-    $router->get('/users', 'UserController@getUser');
-    $router->patch('/users', 'UserController@updateUser');
+    $router->get('/users', 'UserController@get');
+    $router->patch('/users', 'UserController@update');
 
     $router->post('/profile_images', 'ProfileImageController@create');
 
